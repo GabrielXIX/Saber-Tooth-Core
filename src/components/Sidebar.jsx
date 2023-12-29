@@ -3,12 +3,11 @@ import { Button } from "./Button";
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 export function Sidebar({ children }) {
   const [openSidebar, setOpenSidebar] = useState(true);
 
-  // console.log("Sidebar render");
   return (
     <div className="relative">
       {openSidebar && (
@@ -21,7 +20,7 @@ export function Sidebar({ children }) {
         aditionalStyle="absolute bottom-2 right-[-1.75rem] z-30"
         onClick={() => setOpenSidebar(!openSidebar)}
       >
-        <FontAwesomeIcon icon={faChevronLeft} className="h-[18px] w-[18px]" />
+        <FontAwesomeIcon icon={openSidebar ? faChevronLeft : faChevronRight} />
       </Button>
     </div>
   );

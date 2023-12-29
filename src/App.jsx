@@ -1,5 +1,4 @@
 import { NotebookPage } from "./pages/notebook/NotebookPage";
-import { AuthProvider } from "./contexts/Auth";
 import { AppError } from "./pages/error/AppError";
 import { RouterError } from "./pages/error/RouterError";
 
@@ -13,15 +12,13 @@ function App() {
   return (
     <div className="h-[100svh] bg-midnight font-lexend leading-none text-whiteSmoke">
       <ErrorBoundary FallbackComponent={AppError}>
-        <AuthProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<NotebookPage />} />
-              <Route path="*" element={<RouterError />} />
-            </Routes>
-          </Router>
-          <ToastContainer closeOnClick={false} />
-        </AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<NotebookPage />} />
+            <Route path="*" element={<RouterError />} />
+          </Routes>
+        </Router>
+        <ToastContainer closeOnClick={false} />
       </ErrorBoundary>
     </div>
   );

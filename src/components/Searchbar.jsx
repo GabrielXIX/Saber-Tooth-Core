@@ -10,16 +10,16 @@ export function Searchbar({ editor }) {
       if (!searchValue) return;
 
       console.log("Search");
+      console.log(editor.getJSON());
+      editor.commands.setTextSelection({ from: 5, to: 10 });
+      editor.commands.setMark("highlight");
     }, 500),
     []
   );
 
   return (
     <div className="relative flex items-center text-gray-500 focus-within:text-gray-300">
-      <FontAwesomeIcon
-        icon={faSearch}
-        className="pointer-events-none absolute ml-4 h-[16px] w-[16px]"
-      />
+      <FontAwesomeIcon icon={faSearch} className="pointer-events-none absolute ml-4" />
       <input
         type="text"
         className="h-7 w-48 rounded-lg bg-denim pl-10 pr-4 text-[14px] placeholder-gray-500 hover:bg-denimLight focus:bg-denimLight focus:outline focus:outline-1 focus:outline-gray-600"

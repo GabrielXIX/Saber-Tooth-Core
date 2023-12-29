@@ -1,15 +1,12 @@
-import { NoteToolbar } from "./NoteToolbar";
+import { Toolbar } from "./Toolbar";
 import { DropdownMenu } from "../../components/DropdownMenu";
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
-import { Color } from "@tiptap/extension-color";
-import TextStyle from "@tiptap/extension-text-style";
 import Highlight from "@tiptap/extension-highlight";
 import Underline from "@tiptap/extension-underline";
-import FontFamily from "@tiptap/extension-font-family";
 import { useState, useCallback } from "react";
 import { debounce } from "lodash";
 
@@ -21,8 +18,6 @@ export function Editor({
   handleNoteTitleUpdate,
   handleNoteContentUpdate,
   handleRemoveNote,
-  // updateContentLoading,
-  // updateTitleLoading,
 }) {
   const [isTitleVisible, setIsTitleVisible] = useState(true);
 
@@ -45,14 +40,11 @@ export function Editor({
           },
         }),
         Placeholder.configure({
-          placeholder: "Type in your new note!...",
+          placeholder: "Start Typing...",
         }),
         TextAlign.configure({
           types: ["heading", "paragraph"],
         }),
-        Color,
-        FontFamily,
-        TextStyle,
         Highlight,
         Underline,
       ],
@@ -62,9 +54,7 @@ export function Editor({
           class: "px-10 grow focus:outline-none pt-4 leading-normal selection:bg-selection",
         },
       },
-      onUpdate: ({ editor }) => {
-        handleNoteContentChange(editor.getJSON());
-      },
+      onUpdate: ({ editor }) => handleNoteContentChange(editor.getJSON()),
     },
     [selectedNote._id]
   );
@@ -75,13 +65,13 @@ export function Editor({
   }
 
   const handleNoteContentChange = useCallback(
-    debounce(editorContent => handleNoteContentUpdate(editorContent, selectedNote._id), 2000),
+    debounce(editorContent => handleNoteContentUpdate(editorContent, selectedNote._id), 1000),
     [selectedNote._id, handleNoteContentUpdate]
   );
 
   const handleNoteTitleChange = useCallback(
-    debounce(newTitle => handleNoteTitleUpdate(newTitle, selectedNote._id), 2000),
-    [selectedNote._id]
+    debounce(newTitle => handleNoteTitleUpdate(newTitle, selectedNote._id), 1000),
+    [selectedNote._id, handleNoteTitleUpdate]
   );
 
   if (!editor) {
@@ -91,13 +81,7 @@ export function Editor({
   //TODO: Editor re renders on every selection?
   return (
     <div className="min-h-full overflow-auto" onScroll={handleScroll}>
-      <NoteToolbar
-        editor={editor}
-        isTitleVisible={isTitleVisible}
-        // updateContentLoading={updateContentLoading}
-        // updateTitleLoading={updateTitleLoading}
-        noteName={selectedNote.title}
-      />
+      <Toolbar editor={editor} isTitleVisible={isTitleVisible} noteName={selectedNote.title} />
       <div className="mx-10 flex items-center gap-6 border-b-[1px] border-nero2">
         <input
           className="h-[4.375rem] grow overflow-hidden text-ellipsis bg-transparent text-4xl focus:outline-none"
@@ -106,12 +90,13 @@ export function Editor({
           key={selectedNote._id}
           maxLength={60}
           onBlur={e => e.target.setSelectionRange(0, 0)}
+          placeholder="Type a Title..."
         />
         <DropdownMenu
           label="Note Options"
           triggerChild={{
             attributes: { secundary: true, multiItem: true },
-            element: <FontAwesomeIcon icon={faEllipsis} className="h-[18px] w-[18px]" />,
+            element: <FontAwesomeIcon icon={faEllipsis} />,
           }}
           dropdownItems={[
             {
