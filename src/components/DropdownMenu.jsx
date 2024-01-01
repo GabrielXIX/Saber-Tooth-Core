@@ -33,21 +33,26 @@ export function DropdownMenu({
             transition={{ duration: 0.25 }}
           >
             {label && <Label className="px-2 pb-2 font-bold">{label}</Label>}
-            {dropdownItems.map((dropdownItem, key) => (
-              <Item
-                key={key}
-                onSelect={
-                  dropdownItem.onSelect ||
-                  function () {
-                    console.log("Selected");
+            <div className="flex flex-col gap-1">
+              {dropdownItems.map((dropdownItem, key) => (
+                <Item
+                  key={key}
+                  onSelect={
+                    dropdownItem.onSelect ||
+                    function () {
+                      console.log("Selected");
+                      // !remove
+                    }
                   }
-                }
-                className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-charcoal hover:outline-none"
-              >
-                {dropdownItem.element || <p>Option</p>}
-                {dropdownItem.command && <p className="ml-auto pl-4">{dropdownItem.command}</p>}
-              </Item>
-            ))}
+                  className={`flex cursor-pointer items-center gap-2 rounded-lg px-4 py-1.5 transition-colors hover:bg-charcoal hover:outline-none ${
+                    dropdownItem.active ? "bg-sky hover:bg-skyLight " : ""
+                  }`}
+                >
+                  {dropdownItem.element || <p>Option</p>}
+                  {dropdownItem.command && <p className="ml-auto pl-4">{dropdownItem.command}</p>}
+                </Item>
+              ))}
+            </div>
           </motion.div>
         </Content>
       </Portal>

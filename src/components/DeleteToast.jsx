@@ -2,7 +2,6 @@ import { Button } from "./Button";
 
 export function DeleteToast({ setNotebook, deletedNote, closeToast }) {
   function handleUndo() {
-    // !save to local storage
     setNotebook(prevNotebook => ({ ...prevNotebook, notes: [...prevNotebook.notes, deletedNote] }));
     closeToast();
   }

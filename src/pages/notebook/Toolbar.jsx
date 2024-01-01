@@ -10,16 +10,18 @@ import {
   faListOl,
   faParagraph,
 } from "@fortawesome/free-solid-svg-icons";
-import { Searchbar } from "../../components/Searchbar";
 
 export function Toolbar({ editor, isTitleVisible, noteName }) {
-  // console.log("toolbar render");
   return (
-    <div className="sticky top-0 z-10 flex min-h-[2.75rem] items-center bg-nero1 px-10 py-2">
-      <div className="border-r border-r-charcoal pr-2">
-        <Searchbar editor={editor} />
-      </div>
-      <div className="flex border-r border-r-charcoal px-2">
+    <header className="sticky top-0 z-10 flex min-h-[2.75rem] items-center bg-nero1 px-10 py-2">
+      <div className="flex border-r border-r-charcoal pr-2">
+        <Button
+          secundary
+          onClick={() => editor.chain().focus().setParagraph().run()}
+          accented={editor.isActive("paragraph")}
+        >
+          <FontAwesomeIcon icon={faParagraph} />
+        </Button>
         <Button
           secundary
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -33,13 +35,6 @@ export function Toolbar({ editor, isTitleVisible, noteName }) {
           accented={editor.isActive("heading", { level: 2 })}
         >
           <p>H2</p>
-        </Button>
-        <Button
-          secundary
-          onClick={() => editor.chain().focus().setParagraph().run()}
-          accented={editor.isActive("paragraph")}
-        >
-          <FontAwesomeIcon icon={faParagraph} />
         </Button>
       </div>
 
@@ -103,7 +98,7 @@ export function Toolbar({ editor, isTitleVisible, noteName }) {
           <FontAwesomeIcon icon={faAlignJustify} />
         </Button>
       </div>
-      <div className="flex pl-2">
+      <div className="flex px-2">
         <Button
           secundary
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -120,10 +115,10 @@ export function Toolbar({ editor, isTitleVisible, noteName }) {
         </Button>
       </div>
       {!isTitleVisible && (
-        <p className="ml-auto max-w-[7rem] cursor-default overflow-hidden text-ellipsis whitespace-nowrap text-sm font-light text-silver">
+        <p className="ml-auto max-w-[7rem] cursor-default overflow-hidden text-ellipsis whitespace-nowrap pl-2 text-sm font-light text-silver">
           {noteName}
         </p>
       )}
-    </div>
+    </header>
   );
 }
