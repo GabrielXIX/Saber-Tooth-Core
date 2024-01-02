@@ -9,11 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import uuid from "react-uuid";
+import { AES, enc } from "crypto-js";
 import { useEffect, useState } from "react";
 
-import showDeleteToast from "../../utils/ShowDeleteToast";
-import getLastUntitledNoteNumber from "../../utils/getLastUntitledNoteNumber";
-import useIsMount from "../../utils/useIsMount";
+import { showToast } from "../../utils/showToast";
+import { getLastUntitledNoteNumber } from "../../utils/getLastUntitledNoteNumber";
+import { useIsMount } from "../../utils/useIsMount";
 
 const initialNotebook = {
   notebookName: "Notebook 1",
@@ -21,25 +22,38 @@ const initialNotebook = {
 };
 
 export function NotebookPage() {
-  const [notebook, setNotebook] = useState(
-    () => JSON.parse(localStorage.getItem("notebook")) || initialNotebook
+  const [notebook, setNotebook] = useState(() =>
+    localStorage.getItem("notebook")
+      ? JSON.parse(
+          AES.decrypt(localStorage.getItem("notebook"), "secret key 123").toString(enc.Utf8)
+        )
+      : initialNotebook
   );
-  const [activeNoteId, setActiveNoteId] = useState(
-    () => localStorage.getItem("lastActiveNoteId") || ""
+  const [activeNoteId, setActiveNoteId] = useState(() =>
+    localStorage.getItem("lastActiveNoteId")
+      ? AES.decrypt(localStorage.getItem("lastActiveNoteId"), "secret key 456").toString(enc.Utf8)
+      : ""
   );
   const isMount = useIsMount();
 
   useEffect(() => {
     if (isMount) return;
-    localStorage.setItem("notebook", JSON.stringify(notebook));
+    const encryptedNotebook = AES.encrypt(JSON.stringify(notebook), "secret key 123").toString();
+    localStorage.setItem("notebook", encryptedNotebook);
   }, [notebook]);
 
   useEffect(() => {
     if (isMount || !activeNoteId) return;
-    localStorage.setItem("lastActiveNoteId", activeNoteId);
+    const encryptedActiveNoteId = AES.encrypt(activeNoteId, "secret key 456").toString();
+    localStorage.setItem("lastActiveNoteId", encryptedActiveNoteId);
   }, [activeNoteId]);
 
   function addNote() {
+    if (notebook.notes.length >= 20) {
+      showToast("Max Number of Notes is 20!", "error");
+      return;
+    }
+
     const lastUntitledNoteNumber = getLastUntitledNoteNumber(notebook.notes);
 
     const newNote = {
@@ -59,7 +73,9 @@ export function NotebookPage() {
   function removeNote(selectedNoteId) {
     const deletedNote = notebook.notes.find(note => note._id === selectedNoteId);
 
+    // When note deleted is not the last in the list
     if (notebook.notes.length >= 2)
+      // If deleted first note then set second note as active, else set first as active
       setActiveNoteId(notebook.notes[notebook.notes.indexOf(deletedNote) === 0 ? 1 : 0]._id);
     else setActiveNoteId("");
 
@@ -68,7 +84,13 @@ export function NotebookPage() {
       notes: prevNotebook.notes.filter(note => note._id !== selectedNoteId),
     }));
 
-    showDeleteToast(setNotebook, deletedNote);
+    showToast("Note Deleted", "success", () => {
+      setNotebook(prevNotebook => ({
+        ...prevNotebook,
+        notes: [...prevNotebook.notes, deletedNote],
+      }));
+      setActiveNoteId(deletedNote._id);
+    });
   }
 
   function updateNoteContent(editorContent, selectedNoteId) {
@@ -129,7 +151,7 @@ export function NotebookPage() {
         </footer>
       </Sidebar>
       <Content>
-        {activeNoteId ? (
+        {activeNoteId && notebook.notes.length > 0 ? (
           <Editor
             selectedNote={notebook.notes.find(note => note._id === activeNoteId)}
             handleNoteTitleUpdate={updateNoteTitle}

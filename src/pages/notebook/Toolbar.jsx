@@ -98,7 +98,7 @@ export function Toolbar({ editor, isTitleVisible, noteName }) {
           <FontAwesomeIcon icon={faAlignJustify} />
         </Button>
       </div>
-      <div className="flex px-2">
+      <div className="flex pl-2">
         <Button
           secundary
           onClick={() => editor.chain().focus().toggleBulletList().run()}

@@ -6,18 +6,16 @@ import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faSort, faCalendar, faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
+import { useIsMount } from "../../utils/useIsMount";
 
 export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNotebookNameUpdate }) {
   dayjs.extend(relativeTime);
 
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState(localStorage.getItem("lastSortBy") || "date");
+  const isMount = useIsMount();
 
   useEffect(() => {
-    setSortBy(localStorage.getItem("lastSortBy") || "title");
-  }, []);
-
-  useEffect(() => {
-    if (!sortBy) return;
+    if (isMount) return;
 
     localStorage.setItem("lastSortBy", sortBy);
   }, [sortBy]);
@@ -69,7 +67,7 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
         />
       </header>
       {notebook.notes && (
-        <ul className="py-1">
+        <ul className="mb-4 overflow-y-auto py-1">
           {notebook.notes
             .sort((a, b) => {
               if (sortBy === "title") return a.title > b.title;
@@ -81,12 +79,12 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
                 key={note._id}
                 className={`relative cursor-pointer px-6 py-4 ${
                   note._id === activeNoteId
-                    ? "bg-denim after:absolute after:left-full after:top-0 after:h-full after:w-[4px] after:bg-sky"
+                    ? "bg-denim after:absolute after:right-0 after:top-0 after:h-full after:w-[4px] after:bg-sky"
                     : "transition-colors duration-150 hover:bg-nero2"
                 } `}
               >
                 <p className="mb-1 break-words text-xl/none">
-                  {note.title.length > 21 ? note.title.substring(0, 21) + "..." : note.title}
+                  {note.title.length > 21 ? note.title.substring(0, 15) + "..." : note.title}
                 </p>
                 <p className="text-[14px] font-extralight text-silver">
                   {dayjs(note.updatedAt).fromNow()}

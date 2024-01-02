@@ -81,10 +81,10 @@ export function Editor({
   //TODO: Editor re renders on every selection?
   return (
     <div className="min-h-full overflow-auto" onScroll={handleScroll}>
-      <Toolbar editor={editor} isTitleVisible={isTitleVisible} noteName={selectedNote.title} />
+      {/* <Toolbar editor={editor} isTitleVisible={isTitleVisible} noteName={selectedNote.title} /> */}
       <div className="mx-10 flex items-center gap-6 border-b-[1px] border-nero2">
         <input
-          className="h-[4.375rem] grow overflow-hidden text-ellipsis bg-transparent text-4xl focus:outline-none"
+          className="h-[4.375rem] w-56 grow overflow-hidden text-ellipsis bg-transparent text-4xl focus:outline-none"
           onChange={e => handleNoteTitleChange(e.target.value.trim())}
           defaultValue={selectedNote.title}
           key={selectedNote._id}

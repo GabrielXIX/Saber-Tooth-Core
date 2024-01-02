@@ -23,6 +23,7 @@
     "@tiptap/pm": "^2.1.6",
     "@tiptap/react": "^2.1.6",
     "@tiptap/starter-kit": "^2.1.6",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.8",
     "framer-motion": "^10.16.16",
     "lodash": "^4.17.21",
