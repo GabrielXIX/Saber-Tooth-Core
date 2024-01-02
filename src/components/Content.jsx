@@ -12,14 +12,14 @@ export function Content({ children }) {
       {children}
       <Button
         secundary="true"
-        aditionalStyle="absolute bottom-12 left-[-0.25rem] z-30 cursor-pointer rounded-r-lg bg-nero1"
+        aditionalStyle="absolute bottom-12 left-1 z-30 cursor-pointer rounded-r-lg bg-nero1"
         onClick={() => setPopover(!popover)}
       >
         {/* <img src={logo} alt="logo" width={32} /> */}
         <FontAwesomeIcon icon={faTooth} />
       </Button>
       {popover && (
-        <div className="absolute bottom-12 left-[2rem] flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-1.5">
+        <div className="absolute bottom-12 left-8 flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-1.5">
           <p>Made with</p>
           <FontAwesomeIcon icon={faHeart} className="text-red-500" />
           <p>by</p>
