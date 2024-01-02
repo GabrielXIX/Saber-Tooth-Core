@@ -12,7 +12,7 @@ export function Content({ children }) {
       {children}
       <Button
         secundary="true"
-        aditionalStyle="absolute bottom-12 left-1 z-30 cursor-pointer rounded-r-lg bg-nero1"
+        aditionalStyle="absolute bottom-12 left-[-0.25rem] z-30 cursor-pointer rounded-r-lg bg-nero1"
         onClick={() => setPopover(!popover)}
       >
         {/* <img src={logo} alt="logo" width={32} /> */}
