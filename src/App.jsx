@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="h-[100svh] overflow-y-hidden bg-midnight font-lexend leading-none text-whiteSmoke">
+    <div className="h-[100svh] overflow-hidden bg-midnight font-lexend leading-none text-whiteSmoke">
       <ErrorBoundary FallbackComponent={AppError}>
         <Router>
           <Routes>

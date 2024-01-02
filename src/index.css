@@ -32,3 +32,11 @@ svg {
 .Toastify__close-button {
   color: #fff;
 }
+
+.Toastify__toast {
+  @apply bg-nero1 font-lexend text-white;
+}
+
+.Toastify__toast-body {
+  margin-inline: 0.5rem;
+}

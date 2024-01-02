@@ -23,7 +23,7 @@ export function DropdownMenu({
       </Trigger>
       <Portal>
         <Content
-          className="z-50 w-fit rounded-lg bg-nero2 p-3 text-whiteSmoke"
+          className="z-50 w-fit rounded-lg bg-nero2 p-3 font-lexend text-whiteSmoke"
           sideOffset={5}
           asChild
         >

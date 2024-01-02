@@ -10,13 +10,13 @@ export function Content({ children }) {
     <main className="relative flex grow flex-col">
       {children}
       <div
-        className="absolute bottom-4 right-4 cursor-pointer"
+        className="absolute bottom-12 left-0 cursor-pointer rounded-r-lg bg-nero1"
         onClick={() => setPopover(!popover)}
       >
         <img src={logo} alt="logo" width={32} />
       </div>
       {popover && (
-        <div className="absolute bottom-4 right-14 flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-2">
+        <div className="absolute bottom-24 right-14 flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-2">
           <p>Made with</p>
           <FontAwesomeIcon icon={faHeart} className="text-red-500" />
           <p>by</p>
