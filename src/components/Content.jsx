@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/sabertooth_logo.png";
+import { faHeart, faTooth } from "@fortawesome/free-solid-svg-icons";
+// import logo from "../assets/sabertooth_logo.png";
 import { useState } from "react";
+import { Button } from "./Button";
 
 export function Content({ children }) {
   const [popover, setPopover] = useState(false);
@@ -9,14 +10,16 @@ export function Content({ children }) {
   return (
     <main className="relative flex grow flex-col">
       {children}
-      <div
-        className="absolute bottom-12 left-0 cursor-pointer rounded-r-lg bg-nero1"
+      <Button
+        secundary="true"
+        aditionalStyle="absolute bottom-12 left-[-0.25rem] z-30 cursor-pointer rounded-r-lg bg-nero1"
         onClick={() => setPopover(!popover)}
       >
-        <img src={logo} alt="logo" width={32} />
-      </div>
+        {/* <img src={logo} alt="logo" width={32} /> */}
+        <FontAwesomeIcon icon={faTooth} />
+      </Button>
       {popover && (
-        <div className="absolute bottom-24 right-14 flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-2">
+        <div className="absolute bottom-12 left-[2rem] flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-1.5">
           <p>Made with</p>
           <FontAwesomeIcon icon={faHeart} className="text-red-500" />
           <p>by</p>

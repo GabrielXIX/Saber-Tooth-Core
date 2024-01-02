@@ -35,3 +35,5 @@ export default App;
  */
 
 // todo: navigate app with keyboard
+
+//todo: set button props to true or false instead of just prop
