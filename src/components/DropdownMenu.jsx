@@ -44,8 +44,8 @@ export function DropdownMenu({
                       // !remove
                     }
                   }
-                  className={`flex cursor-pointer items-center gap-2 rounded-lg px-4 py-1.5 transition-colors hover:bg-charcoal hover:outline-none ${
-                    dropdownItem.active ? "bg-sky hover:bg-skyLight " : ""
+                  className={`flex cursor-pointer items-center gap-2 rounded-lg px-4 py-1.5 transition-colors hover:outline-none ${
+                    dropdownItem.active ? "bg-sky" : "hover:bg-charcoal"
                   }`}
                 >
                   {dropdownItem.element || <p>Option</p>}

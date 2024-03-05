@@ -46,7 +46,7 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
             {
               element: (
                 <>
-                  <FontAwesomeIcon icon={faCalendar} />
+                  <FontAwesomeIcon icon={faArrowDownAZ} />
                   <p>Title</p>
                 </>
               ),
@@ -56,7 +56,7 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
             {
               element: (
                 <>
-                  <FontAwesomeIcon icon={faArrowDownAZ} />
+                  <FontAwesomeIcon icon={faCalendar} />
                   <p>Date</p>
                 </>
               ),
@@ -70,7 +70,7 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
         <ul className="mb-4 overflow-y-auto py-1">
           {notebook.notes
             .sort((a, b) => {
-              if (sortBy === "title") return a.title > b.title;
+              if (sortBy === "title") return a.title > b.title ? 1 : -1;
               else if (sortBy === "date") return new Date(b.updatedAt) - new Date(a.updatedAt);
             })
             .map(note => (

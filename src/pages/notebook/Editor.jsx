@@ -77,7 +77,7 @@ export function Editor({
   if (!editor) {
     return null;
   }
-
+  // todo: duplicate note handler
   //TODO: Editor re renders on every selection?
   return (
     <div className="min-h-full overflow-auto" onScroll={handleScroll}>
