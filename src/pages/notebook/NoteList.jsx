@@ -25,7 +25,7 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
       <header className="flex items-center gap-1.5 px-4 py-1">
         <FontAwesomeIcon icon={faBook} />
         <input
-          className=" h-full grow overflow-hidden text-ellipsis rounded-sm bg-transparent px-2 selection:bg-selection  hover:ring-2 hover:ring-sky focus:outline focus:outline-2 focus:outline-sky"
+          className="h-7 grow overflow-hidden text-ellipsis rounded-sm bg-transparent px-2 selection:bg-selection  hover:ring-2 hover:ring-sky focus:outline focus:outline-2 focus:outline-sky"
           type="text"
           defaultValue={notebook.notebookName}
           onFocus={e => e.target.select()}
@@ -36,35 +36,37 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
           }}
           onKeyDown={e => e.key === "Enter" && e.target.blur()}
         />
-        <DropdownMenu
-          label="Sort By"
-          triggerChild={{
-            attributes: { secundary: true },
-            element: <FontAwesomeIcon icon={faSort} />,
-          }}
-          dropdownItems={[
-            {
-              element: (
-                <>
-                  <FontAwesomeIcon icon={faArrowDownAZ} />
-                  <p>Title</p>
-                </>
-              ),
-              onSelect: () => setSortBy("title"),
-              active: sortBy === "title",
-            },
-            {
-              element: (
-                <>
-                  <FontAwesomeIcon icon={faCalendar} />
-                  <p>Date</p>
-                </>
-              ),
-              onSelect: () => setSortBy("date"),
-              active: sortBy === "date",
-            },
-          ]}
-        />
+        {notebook.notes.length > 0 && (
+          <DropdownMenu
+            label="Sort By"
+            triggerChild={{
+              attributes: { secundary: true },
+              element: <FontAwesomeIcon icon={faSort} />,
+            }}
+            dropdownItems={[
+              {
+                element: (
+                  <>
+                    <FontAwesomeIcon icon={faArrowDownAZ} />
+                    <p>Title</p>
+                  </>
+                ),
+                onSelect: () => setSortBy("title"),
+                active: sortBy === "title",
+              },
+              {
+                element: (
+                  <>
+                    <FontAwesomeIcon icon={faCalendar} />
+                    <p>Date</p>
+                  </>
+                ),
+                onSelect: () => setSortBy("date"),
+                active: sortBy === "date",
+              },
+            ]}
+          />
+        )}
       </header>
       {notebook.notes && (
         <ul className="mb-4 overflow-y-auto py-1">

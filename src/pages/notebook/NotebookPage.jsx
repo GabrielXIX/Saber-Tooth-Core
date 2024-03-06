@@ -6,7 +6,7 @@ import { CopyrightPopover } from "../../components/CopyrightPopover";
 import { Button } from "../../components/Button";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
 
 import uuid from "react-uuid";
 import { AES, enc } from "crypto-js";
@@ -197,7 +197,19 @@ export function NotebookPage() {
             handleDuplicateNote={duplicateNote}
           />
         ) : (
-          <div className="p-4">Hello, create a new note!</div>
+          <div className="flex h-full flex-col items-center justify-center gap-8 p-8">
+            <div className="flex items-center">
+              <img src="../src/assets/sabertooth_logo.png" alt="Logo" />
+              <h1 className="inline-block">Saber Tooth</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <h3>Create a</h3>
+              <Button onClick={addNote} accented>
+                <h3>Note</h3>
+              </Button>
+              <h3>and start typing!</h3>
+            </div>
+          </div>
         )}
       </main>
     </div>
