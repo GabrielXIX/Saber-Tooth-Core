@@ -6,7 +6,7 @@ import { CopyrightPopover } from "../../components/CopyrightPopover";
 import { Button } from "../../components/Button";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faNoteSticky } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import uuid from "react-uuid";
 import { AES, enc } from "crypto-js";
@@ -199,7 +199,7 @@ export function NotebookPage() {
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-8 p-8">
             <div className="flex items-center">
-              <img src="../src/assets/sabertooth_logo.png" alt="Logo" />
+              <img src="/assets/sabertooth_logo.png" alt="Logo" />
               <h1 className="inline-block">Saber Tooth</h1>
             </div>
             <div className="flex items-center gap-4">
