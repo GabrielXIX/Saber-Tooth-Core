@@ -9,6 +9,10 @@ import {
   faList,
   faListOl,
   faParagraph,
+  faHighlighter,
+  faUnderline,
+  faItalic,
+  faBold,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function Toolbar({ editor, isTitleVisible, noteName }) {
@@ -44,28 +48,28 @@ export function Toolbar({ editor, isTitleVisible, noteName }) {
           onClick={() => editor.chain().focus().toggleBold().run()}
           accented={editor.isActive("bold")}
         >
-          <p className="text-bold">B</p>
+          <FontAwesomeIcon icon={faBold} />
         </Button>
         <Button
           secundary
           onClick={() => editor.chain().focus().toggleItalic().run()}
           accented={editor.isActive("italic")}
         >
-          <p className="italic">I</p>
+          <FontAwesomeIcon icon={faItalic} />
         </Button>
         <Button
           secundary
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           accented={editor.isActive("underline")}
         >
-          <p className="underline">U</p>
+          <FontAwesomeIcon icon={faUnderline} />
         </Button>
         <Button
           secundary
           onClick={() => editor.chain().focus().toggleHighlight().run()}
           accented={editor.isActive("highlight")}
         >
-          <p>H</p>
+          <FontAwesomeIcon icon={faHighlighter} />
         </Button>
       </div>
       <div className="flex gap-1 border-r border-r-charcoal px-2">
