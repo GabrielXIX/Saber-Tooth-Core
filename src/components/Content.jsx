@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faTooth } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faCode } from "@fortawesome/free-solid-svg-icons";
 // import logo from "../assets/sabertooth_logo.png";
 import { useState } from "react";
 import { Button } from "./Button";
@@ -16,10 +16,10 @@ export function Content({ children }) {
         onClick={() => setPopover(!popover)}
       >
         {/* <img src={logo} alt="logo" width={32} /> */}
-        <FontAwesomeIcon icon={faTooth} />
+        <FontAwesomeIcon icon={faCode} />
       </Button>
       {popover && (
-        <div className="absolute bottom-12 left-8 flex cursor-default gap-2 rounded-lg bg-nero1 px-4 py-1.5">
+        <div className="absolute bottom-12 left-8 flex cursor-default gap-2 rounded-lg bg-nero2 px-4 py-1.5">
           <p>Made with</p>
           <FontAwesomeIcon icon={faHeart} className="text-red-500" />
           <p>by</p>

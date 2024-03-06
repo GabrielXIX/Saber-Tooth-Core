@@ -114,6 +114,23 @@ export function NotebookPage() {
     );
   }
 
+  function duplicateNote(selectedNoteId) {
+    const noteToDuplicate = notebook.notes.find(note => note._id === selectedNoteId);
+
+    const duplicateNote = {
+      _id: uuid(),
+      title: `${noteToDuplicate.title} (copy)`,
+      content: noteToDuplicate.content,
+      updatedAt: new Date(),
+    };
+
+    setActiveNoteId(duplicateNote._id);
+    setNotebook(prevNotebook => ({
+      ...prevNotebook,
+      notes: [...prevNotebook.notes, duplicateNote],
+    }));
+  }
+
   function updateNoteContent(editorContent, selectedNoteId) {
     if (notebook.notes.some(note => JSON.stringify(note.content) === JSON.stringify(editorContent)))
       return;
@@ -178,6 +195,7 @@ export function NotebookPage() {
             handleNoteTitleUpdate={updateNoteTitle}
             handleNoteContentUpdate={updateNoteContent}
             handleRemoveNote={removeNote}
+            handleDuplicateNote={duplicateNote}
           />
         ) : (
           <div className="p-4">Hello, create a new note!</div>

@@ -18,6 +18,7 @@ export function Editor({
   handleNoteTitleUpdate,
   handleNoteContentUpdate,
   handleRemoveNote,
+  handleDuplicateNote,
 }) {
   const [isTitleVisible, setIsTitleVisible] = useState(true);
 
@@ -77,8 +78,7 @@ export function Editor({
   if (!editor) {
     return null;
   }
-  // todo: duplicate note handler
-  //TODO: Editor re renders on every selection?
+
   return (
     <div className="min-h-full overflow-auto" onScroll={handleScroll}>
       <Toolbar editor={editor} isTitleVisible={isTitleVisible} noteName={selectedNote.title} />
@@ -106,6 +106,7 @@ export function Editor({
                   <p>Duplicate</p>
                 </>
               ),
+              onSelect: () => handleDuplicateNote(selectedNote._id),
             },
             {
               element: (
