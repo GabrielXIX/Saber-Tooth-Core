@@ -1,7 +1,7 @@
 import { Sidebar } from "../../components/Sidebar";
-import { Content } from "../../components/Content";
 import { NoteList } from "./NoteList";
 import { Editor } from "./Editor";
+import { CopyrightPopover } from "../../components/CopyrightPopover";
 
 import { Button } from "../../components/Button";
 
@@ -85,9 +85,7 @@ export function NotebookPage() {
   function removeNote(selectedNoteId) {
     const deletedNote = notebook.notes.find(note => note._id === selectedNoteId);
 
-    // When note deleted is not the last in the list
     if (notebook.notes.length >= 2)
-      // If deleted first note then set second note as active, else set first as active
       setActiveNoteId(notebook.notes[notebook.notes.indexOf(deletedNote) === 0 ? 1 : 0]._id);
     else setActiveNoteId("");
 
@@ -181,14 +179,15 @@ export function NotebookPage() {
             handleNotebookNameUpdate={updateNotebookName}
           />
         )}
-        <footer className="mb-8 mt-auto px-6 py-1">
+        <footer className="mb-1 mt-auto px-6 py-1">
           <Button accented multiItem onClick={addNote}>
             <FontAwesomeIcon icon={faPlus} />
             <p>New Note</p>
           </Button>
         </footer>
+        <CopyrightPopover />
       </Sidebar>
-      <Content>
+      <main className="relative flex w-full flex-col">
         {activeNoteId && notebook.notes.length > 0 ? (
           <Editor
             selectedNote={notebook.notes.find(note => note._id === activeNoteId)}
@@ -200,7 +199,7 @@ export function NotebookPage() {
         ) : (
           <div className="p-4">Hello, create a new note!</div>
         )}
-      </Content>
+      </main>
     </div>
   );
 }

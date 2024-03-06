@@ -17,7 +17,7 @@ import {
 
 export function Toolbar({ editor, isTitleVisible, noteName }) {
   return (
-    <header className="sticky top-0 z-10 flex min-h-[2.75rem] items-center bg-nero1 px-10 py-2">
+    <header className="sticky top-0 z-10 flex min-h-[2.75rem] items-center overflow-x-auto bg-nero1 px-10 py-2">
       <div className="flex border-r border-r-charcoal pr-2">
         <Button
           secundary

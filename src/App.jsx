@@ -33,7 +33,3 @@ export default App;
  * <3rd party libraries (components - hooks - utilities )>
  * <Icons/Assets>
  */
-
-// todo: navigate app with keyboard
-
-//todo: set button props to true or false instead of just prop
