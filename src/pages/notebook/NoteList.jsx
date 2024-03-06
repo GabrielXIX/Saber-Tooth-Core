@@ -25,7 +25,7 @@ export function NoteList({ notebook, activeNoteId, handleSelectNote, handleNoteb
       <header className="flex items-center gap-1.5 px-4 py-1">
         <FontAwesomeIcon icon={faBook} />
         <input
-          className=" h-full grow overflow-hidden text-ellipsis rounded-sm bg-transparent px-2  hover:ring-2 hover:ring-sky focus:outline focus:outline-2 focus:outline-sky"
+          className=" h-full grow overflow-hidden text-ellipsis rounded-sm bg-transparent px-2 selection:bg-selection  hover:ring-2 hover:ring-sky focus:outline focus:outline-2 focus:outline-sky"
           type="text"
           defaultValue={notebook.notebookName}
           onFocus={e => e.target.select()}
