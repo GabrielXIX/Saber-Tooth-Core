@@ -1,7 +1,7 @@
 export function RouterError() {
   return (
-    <div>
-      <h1>Page not found</h1>1
+    <div className="flex h-full items-center justify-center">
+      <h1>404 - Page not found!</h1>
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import { toast, Slide } from "react-toastify";
 import { Button } from "../components/Button";
+
+import { toast, Slide } from "react-toastify";
 
 export function showToast(text, type, action = false, actionText = "") {
   toast[type](

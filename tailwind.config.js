@@ -9,7 +9,6 @@ export default {
         nero2: "#2C2C2C",
         charcoal: "#373737",
         denim: "#23232D",
-        denimLight: "#2f2f3c",
         sky: "#1B98E0",
         skyLight: "#67BAFE",
         whiteSmoke: "#D4D4D4",
