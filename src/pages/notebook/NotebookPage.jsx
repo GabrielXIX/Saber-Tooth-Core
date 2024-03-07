@@ -197,17 +197,17 @@ export function NotebookPage() {
             handleDuplicateNote={duplicateNote}
           />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-8 p-8">
+          <div className="flex h-full flex-col items-center justify-center gap-10 p-8">
             <div className="flex items-center">
               <img src="/assets/sabertooth_logo.png" alt="Logo" />
               <h1 className="inline-block">Saber Tooth</h1>
             </div>
-            <div className="flex items-center gap-4">
-              <h3>Create a</h3>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <p className="whitespace-nowrap text-lg">Create a</p>
               <Button onClick={addNote} accented>
-                <h3>Note</h3>
+                <p className="whitespace-nowrap text-[18px] leading-[18px]">Note</p>
               </Button>
-              <h3>and start typing!</h3>
+              <p className="whitespace-nowrap text-lg">and start typing!</p>
             </div>
           </div>
         )}
